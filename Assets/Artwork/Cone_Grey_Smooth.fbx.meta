@@ -1,17 +1,19 @@
 fileFormatVersion: 2
-guid: c4dcc91bb0fb0024aae44d231c91e04e
-timeCreated: 1460394021
+guid: 292ca1dce5f31b24184c86653def5613
+timeCreated: 1460396862
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Cube
-    7400000: Default Take
-    9500000: //RootNode
+    100000: Cone
+    100002: //RootNode
+    100004: Spot
+    400000: Cone
+    400002: //RootNode
+    400004: Spot
+    2300000: Cone
+    3300000: Cone
+    4300000: Cone
   materials:
     importMaterials: 1
     materialName: 0
@@ -70,7 +72,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

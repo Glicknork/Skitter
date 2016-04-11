@@ -1,17 +1,19 @@
 fileFormatVersion: 2
-guid: 0b6e672648c2d4441bdad87cc3b52331
-timeCreated: 1460394585
+guid: c9445b9d20101be4bb4a0d72db3fa50f
+timeCreated: 1460396862
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Cube
+    100004: Spot
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Cone
-    7400000: Default Take
-    9500000: //RootNode
+    400002: Cube
+    400004: Spot
+    2300000: Cube
+    3300000: Cube
+    4300000: Cube
   materials:
     importMaterials: 1
     materialName: 0
@@ -70,7 +72,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

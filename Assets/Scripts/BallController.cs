@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BallController : MonoBehaviour {
 
+    public float jumpVelocity = 10f;
 
     Rigidbody body;
 
@@ -17,14 +18,9 @@ public class BallController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-            body.AddForce(50, 0, 0);            
-        }
-
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            body.velocity = new Vector3(body.velocity.x, 2f, body.velocity.z);
+            body.velocity = new Vector3(body.velocity.x, jumpVelocity, body.velocity.z);
         }
 
     }
