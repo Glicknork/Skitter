@@ -12,24 +12,32 @@ public class BallController : MonoBehaviour
 
     bool grounded;
 
+    bool jumped = false;
+
     Rigidbody body;
 
     Collider contactDetector;
 
+    float xPos;
+    float zPos;
+
     // Use this for initialization
     void Start()
     {
-
         body = GetComponent<Rigidbody>();
-
+        Physics.gravity = new Vector3(0.0f, -gravity, 0.0f);
+        xPos = body.position.x;
+        zPos = body.position.z;
     }
 
     // Update is called once per frame
     void Update()
     {
+        body.position = new Vector3(xPos, body.position.y, zPos);
 
-        if (grounded && Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) && jumped == false)
         {
+            jumped = true;
             if (Physics.gravity.y < 0f)
             {
                 body.velocity = new Vector3(0f, smallJump, body.velocity.z);
@@ -38,10 +46,12 @@ public class BallController : MonoBehaviour
             {
                 body.velocity = new Vector3(0f, -smallJump, body.velocity.z);
             }
+
         }
 
-        if (grounded && Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
+            jumped = true;
             if (Physics.gravity.y < 0f)
             {
                 body.velocity = new Vector3(0f, bigJump, body.velocity.z);
@@ -51,9 +61,27 @@ public class BallController : MonoBehaviour
                 body.velocity = new Vector3(0f, -bigJump, body.velocity.z);
             }
         }
+
+        if (grounded)
+        {             
+            jumped = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (Physics.gravity.y < 0f)
+            {
+                Physics.gravity = new Vector3(0.0f, gravity, 0.0f);
+            }
+            else if(Physics.gravity.y > 0f)
+            {
+                Physics.gravity = new Vector3(0.0f, -gravity, 0.0f);
+            }            
+        }
     }
 
 
+    
 
     void OnTriggerExit(Collider coll)
     {
@@ -78,15 +106,7 @@ public class BallController : MonoBehaviour
         {
             grounded = true;
         }
-
-        if (coll.gameObject.tag == "GravZoneTop")
-        {
-            Physics.gravity = new Vector3 (0.0f, gravity, 0.0f);
-        }
-        if (coll.gameObject.tag == "GravZoneBottom")
-        {
-            Physics.gravity = new Vector3(0.0f, -gravity, 0.0f);
-        }        
+               
     }
 }
 
