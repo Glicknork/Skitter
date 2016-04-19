@@ -37,12 +37,12 @@ public class SpawnNewBlock : MonoBehaviour {
         if (Physics.Raycast(spawnCheckerLower.position, lowerBlockSpawn.position, Mathf.Infinity, layerMask, QueryTriggerInteraction.Collide) &&
             Physics.Raycast(spawnCheckerUpper.position, upperBlockSpawn.position, Mathf.Infinity, layerMask, QueryTriggerInteraction.Collide))
         {
-            Debug.Log("blank FOUND");
+            //Debug.Log("blank FOUND");
             return blocks[Random.Range(0, blocks.Length)];
         }
         else
         {
-            Debug.Log("blank not found");
+            //Debug.Log("blank not found");
             return blankBlock;
         }
         

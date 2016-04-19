@@ -7,7 +7,7 @@ public class CubeMoveLeft : MonoBehaviour {
 
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
         transform.position = new Vector3(transform.position.x - moveSpeed, transform.position.y, transform.position.z);
 	}
