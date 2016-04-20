@@ -3,6 +3,8 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
+    public float levelSpeed = 0.05f;
+
 	// Use this for initialization
 	void Start () {
 	

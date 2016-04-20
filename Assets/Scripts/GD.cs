@@ -3,13 +3,16 @@ using System.Collections;
 
 public class GD : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public static GameController gameController;
+
+    public static BallController ballController;
+
+
+
+    void Awake()
+    {
+        gameController = GetComponent<GameController>();
+        ballController = GameObject.Find("Ball").GetComponent<BallController>();
+
+    }
 }
