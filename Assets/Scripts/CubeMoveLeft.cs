@@ -17,14 +17,14 @@ public class CubeMoveLeft : MonoBehaviour {
 
     void Start()
     {
-        moveSpeed = GD.gameController.levelSpeed;
+        moveSpeed = GD.gameController.blockTransformSpeed;
     }
 
 	
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        transform.position = new Vector3(transform.position.x - GD.gameController.levelSpeed, transform.position.y, transform.position.z);
+        transform.position = new Vector3(transform.position.x - GD.gameController.blockTransformSpeed, transform.position.y, transform.position.z);
 	}
 
     void OnTriggerEnter(Collider coll)

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class SpawnNewBlock : MonoBehaviour {
 
+    public float spawnSpeed = 0.5f;
+
     public GameObject[] blocks;
 
     public GameObject blankBlock; 
@@ -22,9 +24,26 @@ public class SpawnNewBlock : MonoBehaviour {
 
     bool blankBlockSpawned;
 
-        
+    void Start()
+    {
+        StartCoroutine("SpawnBlock");
+    }
 
-	void OnTriggerEnter(Collider coll)
+    IEnumerator SpawnBlock()
+    {
+        yield return new WaitForSeconds(spawnSpeed);
+        // instanatiates an upperblock clone at the spawn spot and rotates it so it's pointing down
+        GameObject upperBlockClone = (GameObject)Instantiate(ReturnNewSpawnBlock(), upperBlockSpawn.position, upperBlockSpawn.rotation);
+        Vector3 rotationVector = upperBlockClone.transform.rotation.eulerAngles;
+        rotationVector.x = 90;
+        upperBlockClone.transform.rotation = Quaternion.Euler(rotationVector);
+        // instantiates a lowerblock clone at the spawn spot
+        GameObject lowerBlockClonce = (GameObject)Instantiate(ReturnNewSpawnBlock(), lowerBlockSpawn.position, lowerBlockSpawn.rotation);
+        StartCoroutine("SpawnBlock");
+    }
+
+
+	/*void OnTriggerEnter(Collider coll)
     {
         if(coll.gameObject.tag == "Block")
         {
@@ -36,7 +55,7 @@ public class SpawnNewBlock : MonoBehaviour {
             // instantiates a lowerblock clone at the spawn spot
             GameObject lowerBlockClonce = (GameObject)Instantiate(ReturnNewSpawnBlock(), lowerBlockSpawn.position, lowerBlockSpawn.rotation);
         }  
-    }
+    }*/
 
     GameObject ReturnNewSpawnBlock()
     {
