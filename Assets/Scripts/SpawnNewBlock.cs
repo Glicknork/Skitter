@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SpawnNewBlock : MonoBehaviour {
+public class SpawnNewBlock : MonoBehaviour
+{
 
     public GameObject[] blocks;
 
-    public GameObject blankBlock; 
-    
+    public GameObject blankBlock;
+
     public Transform upperBlockSpawn;
     public Transform lowerBlockSpawn;
 
@@ -16,28 +17,35 @@ public class SpawnNewBlock : MonoBehaviour {
 
     public GameObject[] blockList;
     public List<GameObject> blocksSpawned = new List<GameObject>();
-        
+
 
     int layerMask = 1 << 8;
 
     bool blankBlockSpawned;
 
-        
+    public GameObject LastUpperSpawned;
+    public GameObject LastLowerSpawned;
 
-	void OnTriggerEnter(Collider coll)
+    public void Spawn(bool IsUpper)
     {
-        if(coll.gameObject.tag == "Block")
+        if (IsUpper)
         {
-            // instanatiates an upperblock clone at the spawn spot and rotates it so it's pointing down
-            GameObject upperBlockClone = (GameObject) Instantiate(ReturnNewSpawnBlock(), upperBlockSpawn.position, upperBlockSpawn.rotation);
-            Vector3 rotationVector = upperBlockClone.transform.rotation.eulerAngles;
-            rotationVector.x = 90;
-            upperBlockClone.transform.rotation = Quaternion.Euler(rotationVector);            
-            // instantiates a lowerblock clone at the spawn spot
-            GameObject lowerBlockClonce = (GameObject)Instantiate(ReturnNewSpawnBlock(), lowerBlockSpawn.position, lowerBlockSpawn.rotation);
-        }  
+            Vector3 LastUpperPos = new Vector3(LastUpperSpawned.transform.position.x + 2f, LastUpperSpawned.transform.position.y, LastUpperSpawned.transform.position.z);
+            GameObject RandomBlock = blockList[Random.Range(0, blockList.Length)];
+            GameObject upperBlockClone = (GameObject)Instantiate(RandomBlock, LastUpperPos, RandomBlock.transform.rotation);
+            upperBlockClone.tag = LastUpperSpawned.tag;
+            LastUpperSpawned = upperBlockClone;
+        }
+        else
+        {            
+            Vector3 LastLowerPos = new Vector3(LastLowerSpawned.transform.position.x + 2f, LastLowerSpawned.transform.position.y, LastLowerSpawned.transform.position.z);
+            GameObject RandomBlock = blockList[Random.Range(0, blockList.Length)];
+            GameObject lowerBlockClone = (GameObject)Instantiate(RandomBlock, LastLowerPos, Quaternion.Euler(-90, 0, 0));
+            lowerBlockClone.tag = LastLowerSpawned.tag;
+            LastLowerSpawned = lowerBlockClone;
+        }
     }
-
+    /*
     GameObject ReturnNewSpawnBlock()
     {
         if (BlankThresholdReached())
@@ -55,7 +63,7 @@ public class SpawnNewBlock : MonoBehaviour {
         int numberOfBlanks = 0;
         for (int i = 0; i < blocksSpawned.Count; i++)
         {
-            if(blocksSpawned[i].GetComponent<CubeMoveLeft>().blockType == CubeMoveLeft.BlockType.BLANK)
+            if (blocksSpawned[i].GetComponent<CubeMoveLeft>().blockType == CubeMoveLeft.BlockType.BLANK)
             {
                 numberOfBlanks += 1;
             }
@@ -65,13 +73,13 @@ public class SpawnNewBlock : MonoBehaviour {
                 return true;
             }
         }
-        if(blocksSpawned.Count > 6)
+        if (blocksSpawned.Count > 6)
         {
             blocksSpawned.Clear();
         }
         return false;
     }
-
+    */
     /*GameObject[] FillBlockArray()
     {
        GameObject[] tempArray = new GameObject[blockList.Count];

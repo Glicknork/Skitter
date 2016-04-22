@@ -31,7 +31,7 @@ public class BallController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         body.position = new Vector3(xPos, body.position.y, zPos);
 

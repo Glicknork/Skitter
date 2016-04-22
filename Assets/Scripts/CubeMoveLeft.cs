@@ -26,7 +26,7 @@ public class CubeMoveLeft : MonoBehaviour {
     {
         transform.position = new Vector3(transform.position.x - GD.gameController.levelSpeed, transform.position.y, transform.position.z);
 	}
-
+    /*
     void OnTriggerEnter(Collider coll)
     {
         
@@ -34,5 +34,5 @@ public class CubeMoveLeft : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-    }
+    }*/
 }
