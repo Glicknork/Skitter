@@ -8,6 +8,7 @@ TagManager:
   - Spawner
   - BaseBlock
   - Block
+  - Floor
   layers:
   - Default
   - TransparentFX

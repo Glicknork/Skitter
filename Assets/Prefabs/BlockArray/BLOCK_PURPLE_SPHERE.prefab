@@ -74,7 +74,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: c9445b9d20101be4bb4a0d72db3fa50f, type: 3}
 --- !u!114 &11418006
 MonoBehaviour:

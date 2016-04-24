@@ -12,6 +12,7 @@ GameObject:
   - 23: {fileID: 2313540}
   - 114: {fileID: 11491588}
   - 64: {fileID: 6478434}
+  - 122: {fileID: 12202180}
   m_Layer: 0
   m_Name: ISO_SPHERE
   m_TagString: BaseBlock
@@ -74,7 +75,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: 36f74203cbcf5314dba7cd772047bbfb, type: 3}
 --- !u!114 &11491588
 MonoBehaviour:
@@ -88,11 +89,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Delta_Normal: {x: 0, y: 0, z: 0}
+  _Delta_Rotate: {x: 0, y: -3, z: 5}
   _Delta_Speed: {x: 0, y: 0, z: 0}
   _Delta_Scale: {x: 0, y: 0, z: 0}
   Block_Type: 4
   _Damage_Per_Second: 0
   Offset: {x: 0, y: 0, z: 0}
+--- !u!122 &12202180
+Halo:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117672}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4279762688
+  m_Size: 1.5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

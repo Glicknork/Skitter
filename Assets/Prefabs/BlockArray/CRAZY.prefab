@@ -12,6 +12,7 @@ GameObject:
   - 23: {fileID: 2330296}
   - 114: {fileID: 11472988}
   - 64: {fileID: 6413420}
+  - 122: {fileID: 12291596}
   m_Layer: 0
   m_Name: CRAZY
   m_TagString: BaseBlock
@@ -74,7 +75,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: 07294ca03b1ae0744bc6b70ae4e64a13, type: 3}
 --- !u!114 &11472988
 MonoBehaviour:
@@ -88,11 +89,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Delta_Normal: {x: 0, y: 0, z: 0}
+  _Delta_Rotate: {x: 0, y: 0, z: 6}
   _Delta_Speed: {x: 0, y: 0, z: 0}
   _Delta_Scale: {x: 0, y: 0, z: 0}
   Block_Type: 6
   _Damage_Per_Second: 0
   Offset: {x: 0, y: 0, z: 0}
+--- !u!122 &12291596
+Halo:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136502}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278190335
+  m_Size: 1.5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

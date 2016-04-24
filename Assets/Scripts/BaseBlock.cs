@@ -43,6 +43,14 @@ public class BaseBlock : MonoBehaviour
     }
     //------------------------------------------------------------------------
     [SerializeField]
+    private Vector3 _Delta_Rotate;
+    public Vector3 Delta_Rotate
+    {
+        get { return _Delta_Rotate; }
+        set { _Delta_Rotate = value; }
+    }
+    //------------------------------------------------------------------------
+    [SerializeField]
     private Vector3 _Delta_Speed;
     public Vector3 Delta_Speed
     {
@@ -60,6 +68,8 @@ public class BaseBlock : MonoBehaviour
     //------------------------------------------------------------------------
     public BlockType Block_Type;
     //------------------------------------------------------------------------
+    public float Spawn_Chance;
+    //------------------------------------------------------------------------
     [SerializeField]
     private float _Damage_Per_Second;
     public float Damage_Per_Second
@@ -70,6 +80,14 @@ public class BaseBlock : MonoBehaviour
     //------------------------------------------------------------------------
     public Vector3 Offset = new Vector3(0f, 0f, 0f);
     //------------------------------------------------------------------------
+    private Spawner _Parent_Spawner;
+    public Spawner Parent_Spawner { get { return _Parent_Spawner; } }
+    public Spawner Parent_Spawner_Set(Spawner New_Parent_Spawner) {
+        if (New_Parent_Spawner == null)
+            throw new NullReferenceException("Parent_Spawner_Set(Spawner New_Parent_Spawner) New_Parent_Spawner is null!"); _Parent_Spawner = New_Parent_Spawner;
+        return Parent_Spawner;
+    }
+    //------------------------------------------------------------------------
     // Do stuf when the block dies
     internal void Die()
     {
@@ -79,12 +97,13 @@ public class BaseBlock : MonoBehaviour
 
     //------------------------------------------------------------------------
     void FixedUpdate()
-    {
+    {        
         transform.position = new Vector3(
             transform.position.x + (Delta_Normal.x * Delta_Scale.x * Delta_Speed.x),
             transform.position.y + (Delta_Normal.y * Delta_Scale.y * Delta_Speed.y),
             transform.position.z + (Delta_Normal.z * Delta_Scale.z * Delta_Speed.z)
         );
+        transform.Rotate(Delta_Rotate);
     }
     //------------------------------------------------------------------------
 
@@ -92,13 +111,14 @@ public class BaseBlock : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        
     }
     //------------------------------------------------------------------------
     // Update is called once per frame
     void Update()
     {
-
+        
+        
     }
 
 
