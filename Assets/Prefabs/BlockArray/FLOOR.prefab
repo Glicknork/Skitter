@@ -11,10 +11,10 @@ GameObject:
   - 33: {fileID: 3375758}
   - 23: {fileID: 2321486}
   - 114: {fileID: 11407428}
-  - 65: {fileID: 6536240}
+  - 64: {fileID: 6492190}
   m_Layer: 0
   m_Name: FLOOR
-  m_TagString: BaseBlock
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,8 +64,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149410}
   m_Mesh: {fileID: 4300000, guid: e2dac4d377f302845892785eff0b4c4e, type: 3}
---- !u!65 &6536240
-BoxCollider:
+--- !u!64 &6492190
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -74,8 +74,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.020000007, y: 0.020000005, z: 0.019999996}
-  m_Center: {x: -4.656613e-10, y: 5.8571475e-10, z: 0.000000014901161}
+  m_Convex: 1
+  m_Mesh: {fileID: 4300000, guid: e2dac4d377f302845892785eff0b4c4e, type: 3}
 --- !u!114 &11407428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,8 +87,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2616a9191ef361479881c117c6735ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Spawn_Chance: 0
   _Delta_Normal: {x: 0, y: 0, z: 0}
-  _Delta_Speed: {x: 0, y: 0, z: 0}
+  _Delta_Rotate: {x: 0, y: 0, z: 0}
+  _Delta_Speed: 0
   _Delta_Scale: {x: 0, y: 0, z: 0}
   Block_Type: 1
   _Damage_Per_Second: 0

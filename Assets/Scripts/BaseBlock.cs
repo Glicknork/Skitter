@@ -13,7 +13,7 @@ public enum BlockType
     CRAZY,
     CONE_PURPLE,
     CONE_GRAY,
-    BLANK_10,
+    SPAWNER,
     BLANK_11,
     BLANK_12,
     BLANK_13,
@@ -33,6 +33,15 @@ public enum BlockType
 //------------------------------------------------------------------------
 public class BaseBlock : MonoBehaviour
 {
+    public bool Destroy_On_Contact = false;
+    //------------------------------------------------------------------------
+    [SerializeField]
+    private float _Spawn_Chance;
+    public float Spawn_Chance
+    {
+        get { return _Spawn_Chance; }
+        set { _Spawn_Chance = value; }
+    }
     //------------------------------------------------------------------------
     [SerializeField]
     private Vector3 _Delta_Normal;
@@ -51,8 +60,8 @@ public class BaseBlock : MonoBehaviour
     }
     //------------------------------------------------------------------------
     [SerializeField]
-    private Vector3 _Delta_Speed;
-    public Vector3 Delta_Speed
+    private float _Delta_Speed;
+    public float Delta_Speed
     {
         get { return _Delta_Speed; }
         set { _Delta_Speed = value; }
@@ -68,8 +77,6 @@ public class BaseBlock : MonoBehaviour
     //------------------------------------------------------------------------
     public BlockType Block_Type;
     //------------------------------------------------------------------------
-    public float Spawn_Chance;
-    //------------------------------------------------------------------------
     [SerializeField]
     private float _Damage_Per_Second;
     public float Damage_Per_Second
@@ -82,10 +89,18 @@ public class BaseBlock : MonoBehaviour
     //------------------------------------------------------------------------
     private Spawner _Parent_Spawner;
     public Spawner Parent_Spawner { get { return _Parent_Spawner; } }
+    //------------------------------------------------------------------------
     public Spawner Parent_Spawner_Set(Spawner New_Parent_Spawner) {
         if (New_Parent_Spawner == null)
-            throw new NullReferenceException("Parent_Spawner_Set(Spawner New_Parent_Spawner) New_Parent_Spawner is null!"); _Parent_Spawner = New_Parent_Spawner;
+            throw new NullReferenceException("Parent_Spawner_Set(Spawner New_Parent_Spawner) New_Parent_Spawner is null!");
+        _Parent_Spawner = New_Parent_Spawner;
         return Parent_Spawner;
+    }
+    //------------------------------------------------------------------------
+    // Do stuff when a ball contacts this block
+    internal void Contact()
+    {
+
     }
     //------------------------------------------------------------------------
     // Do stuf when the block dies
@@ -99,9 +114,9 @@ public class BaseBlock : MonoBehaviour
     void FixedUpdate()
     {        
         transform.position = new Vector3(
-            transform.position.x + (Delta_Normal.x * Delta_Scale.x * Delta_Speed.x),
-            transform.position.y + (Delta_Normal.y * Delta_Scale.y * Delta_Speed.y),
-            transform.position.z + (Delta_Normal.z * Delta_Scale.z * Delta_Speed.z)
+            transform.position.x + (Delta_Scale.x * Delta_Normal.x * Delta_Speed),
+            transform.position.y + (Delta_Scale.y * Delta_Normal.y * Delta_Speed),
+            transform.position.z + (Delta_Scale.z * Delta_Normal.z * Delta_Speed)
         );
         transform.Rotate(Delta_Rotate);
     }

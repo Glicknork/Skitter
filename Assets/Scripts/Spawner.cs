@@ -1,14 +1,16 @@
 ﻿using System;
 using UnityEngine;
 //------------------------------------------------------------------------
-public class Spawner : MonoBehaviour
+public class Spawner : BaseBlock
 {
     //------------------------------------------------------------------------
-    private float Block_Size = 2.0f;
-    private Vector3 Default_Delta_Normal = new Vector3(-1f, 0f, 0f);
-    private Vector3 Default_Delta_Scale = new Vector3(0.2f, 0f, 0f);
-    private Vector3 Default_Delta_Speed = new Vector3(1f, 0f, 0f);
+    public float Block_Size = 2.0f;
+    public Vector3 Default_Delta_Normal = new Vector3(-1f, 0f, 0f);
+    public Vector3 Default_Delta_Scale = new Vector3(0.2f, 0f, 0f);
+    public float Default_Delta_Speed = 1f;
+
     public Vector3 Angle = new Vector3(90f, 0f, 0f);
+    public bool Is_Spawning = true;
     //------------------------------------------------------------------------
     public BlockArray Block_Pool;
     public GameObject Single_Block;
@@ -18,7 +20,7 @@ public class Spawner : MonoBehaviour
     //------------------------------------------------------------------------
     public GameObject Floor;
     //------------------------------------------------------------------------
-    public GameObject NewBlock(GameObject BlockType, Vector3 Delta_Normal, Vector3 Delta_Scale, Vector3 Delta_Speed, Vector3 Angle, Vector3 Position)
+    public GameObject NewBlock(GameObject BlockType, Vector3 Delta_Normal, Vector3 Delta_Scale, float Delta_Speed, Vector3 Angle, Vector3 Position)
     {
         BaseBlock BaseBlock = BlockType.GetComponent<BaseBlock>() as BaseBlock;
 
@@ -57,10 +59,32 @@ public class Spawner : MonoBehaviour
         _Last_Spawned_Object = RandomBlock();
     }
     //------------------------------------------------------------------------
+    // This is badly written and needs to be made better
     public GameObject RandomBlock()
     {
+        float max = 0;
+
+        foreach (GameObject GO in Block_Pool.Blocks) {
+            BaseBlock GOBB = GO.GetComponent<BaseBlock>() as BaseBlock;
+            max += GOBB.Spawn_Chance;
+        }
+
+        int index = -1;
+        double r = UnityEngine.Random.Range(0, max);
+
+        foreach (GameObject GO in Block_Pool.Blocks)
+        {
+            BaseBlock GOBB = GO.GetComponent<BaseBlock>() as BaseBlock;
+            r -= GOBB.Spawn_Chance;
+            if (GOBB.Spawn_Chance == 0) index++;
+            index++;
+            index = index % Block_Pool.Count;
+            if (r <= 0)            
+                break;            
+        }
+               
         return NewBlock(
-            Block_Pool == null ? Single_Block : Block_Pool[UnityEngine.Random.Range(0, Block_Pool.Count)],
+            Block_Pool == null ? Single_Block : Block_Pool[index],
             Default_Delta_Normal,
             Default_Delta_Scale,
             Default_Delta_Speed,
@@ -71,18 +95,18 @@ public class Spawner : MonoBehaviour
     //------------------------------------------------------------------------
     void Update()
     {
-        if (_Last_Spawned_Object == null) return;
-        float Delta = transform.position.x - _Last_Spawned_Object.transform.position.x;
-        if (Delta >= Block_Size)
+        if (!Is_Spawning) return;
+
+        if (_Last_Spawned_Object == null)
         {
-            _Last_Spawned_Object = NewBlock(
-                Block_Pool == null ? Single_Block : Block_Pool[UnityEngine.Random.Range(0, Block_Pool.Count)],
-                Default_Delta_Normal,
-                Default_Delta_Scale,
-                Default_Delta_Speed,
-                Angle,
-                new Vector3(_Last_Spawned_Object.transform.position.x + Block_Size, transform.position.y, transform.position.z)
-             );
+            _Last_Spawned_Object = RandomBlock();
+        }
+        else {
+            float Delta = Vector3.Distance(transform.position, _Last_Spawned_Object.transform.position);
+            if (Delta >= Block_Size)
+            {
+                _Last_Spawned_Object = RandomBlock();
+            }
         }
     }
     //------------------------------------------------------------------------

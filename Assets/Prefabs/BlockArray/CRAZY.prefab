@@ -88,9 +88,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2616a9191ef361479881c117c6735ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Spawn_Chance: 2
   _Delta_Normal: {x: 0, y: 0, z: 0}
   _Delta_Rotate: {x: 0, y: 0, z: 6}
-  _Delta_Speed: {x: 0, y: 0, z: 0}
+  _Delta_Speed: 0
   _Delta_Scale: {x: 0, y: 0, z: 0}
   Block_Type: 6
   _Damage_Per_Second: 0
